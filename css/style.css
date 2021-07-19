@@ -520,6 +520,7 @@ main {
   display: block;
   max-width: 600px;
   max-height: 600px;
+  transition: transform 0.1s ease;
 }
 
 
@@ -528,6 +529,7 @@ main {
  */
 
 .effect-level {
+  display: none;
   position: absolute;
   bottom: 9px;
   left: 50%;
@@ -696,6 +698,18 @@ main {
   border-radius: 5px;
 }
 
+.text__hashtags:not(:placeholder-shown):invalid {
+  outline: none;
+  -webkit-box-shadow: 0 0 2px 2px #ff2a00;
+          box-shadow: 0 0 2px 2px #ff2a00;
+}
+
+.text__hashtags:not(:placeholder-shown):valid {
+  outline: none;
+  -webkit-box-shadow: 0 0 2px 2px #77f373;
+          box-shadow: 0 0 2px 2px #77f373;
+}
+
 .text__description {
   width: 450px;
   height: 100px;
@@ -710,6 +724,17 @@ main {
   border-radius: 5px;
 }
 
+.text__description:not(:placeholder-shown):invalid {
+  outline: none;
+  -webkit-box-shadow: 0 0 2px 2px #ff2a00;
+          box-shadow: 0 0 2px 2px #ff2a00;
+}
+
+.text__description:not(:placeholder-shown):valid {
+  outline: none;
+  -webkit-box-shadow: 0 0 2px 2px #77f373;
+          box-shadow: 0 0 2px 2px #77f373;
+}
 
 /**
  * Кнопка для отправки изображения
