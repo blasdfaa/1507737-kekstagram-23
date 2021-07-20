@@ -1,5 +1,10 @@
+const url = {
+  POST: 'https://23.javascript.pages.academy/kekstagram',
+  GET: 'https://23.javascript.pages.academy/kekstagram/data',
+};
+
 export function sendFormData(onSuccess, onFailure, body) {
-  fetch('https://23.javascript.pages.academy/kekstagram',
+  fetch(url.POST,
     {
       method: 'POST',
       'Content-Type': 'multipart/form-data',
@@ -17,7 +22,7 @@ export function sendFormData(onSuccess, onFailure, body) {
 }
 
 export async function fetchPhotos() {
-  const response = await fetch('https://23.javascript.pages.academy/kekstagram/data',
+  const response = await fetch(url.GET,
     {
       method: 'GET',
       credentials: 'same-origin',

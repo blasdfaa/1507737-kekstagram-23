@@ -12,7 +12,7 @@ function setScaleOnImg() {
   photoPreview.style.transform = `scale(${currentValue / 100})`;
 }
 
-function setMinusScale() {
+function prevScaleClickHandler() {
   const currentValue = parseFloat(scaleCounter.value);
 
   if (currentValue === MIN_SCALE_VALUE) {
@@ -24,7 +24,7 @@ function setMinusScale() {
   setScaleOnImg();
 }
 
-function setPlusScale() {
+function nextScaleClickHandler() {
   const currentValue = parseFloat(scaleCounter.value);
 
   if (currentValue === MAX_SCALE_VALUE) {
@@ -36,5 +36,9 @@ function setPlusScale() {
   setScaleOnImg();
 }
 
-scaleMinusButton.addEventListener('click', setMinusScale);
-scalePlusButton.addEventListener('click', setPlusScale);
+export function resetScaleModifier() {
+  photoPreview.style.transform = '';
+}
+
+scaleMinusButton.addEventListener('click', prevScaleClickHandler);
+scalePlusButton.addEventListener('click', nextScaleClickHandler);

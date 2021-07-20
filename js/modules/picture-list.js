@@ -1,10 +1,14 @@
 import { fetchPhotos } from '../utils/api.js';
+import { debounce } from '../utils/debounce.js';
 import { openAlert } from '../utils/popup-alert.js';
-import { activateFilters } from './filter-list.js';
+import { activateFilters, filterByComments, filterByDefault, filterByRandom } from './filter-list.js';
 import { renderFullPicture } from './fullscreen-photo.js';
+
+const RERENDER_DELAY = 500;
 
 const picturesContainer = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const filterContainer = document.querySelector('.img-filters');
 
 function removeOldList() {
   picturesContainer.querySelectorAll('.picture').forEach((item) => item.remove());
@@ -32,15 +36,44 @@ function createPictureList(pictureData) {
   picturesContainer.append(pictureListFragment);
 }
 
-export function renderPictureList(sortFn) {
+export function renderPictureList(pictureData) {
+  createPictureList(pictureData);
+
+  function changeFilterHandler(evt) {
+    const target = evt.target;
+
+    switch (target.id) {
+      case 'filter-default':
+        createPictureList(
+          filterByDefault(pictureData),
+        );
+        break;
+      case 'filter-random':
+        createPictureList(
+          filterByRandom(pictureData),
+        );
+        break;
+      case 'filter-discussed':
+        createPictureList(
+          filterByComments(pictureData),
+        );
+        break;
+    }
+  }
+
+  filterContainer.addEventListener('click', debounce(changeFilterHandler, RERENDER_DELAY));
+}
+
+export function getPictureList() {
   fetchPhotos()
     .then((data) => {
-      createPictureList(
-        sortFn(data),
-      ),
+      renderPictureList(data),
       activateFilters();
     })
     .catch(() => {
       openAlert('error', 'Ошибка загрузки данных с сервера', 'закрыть');
     });
 }
+
+getPictureList();
+

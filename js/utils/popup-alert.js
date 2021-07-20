@@ -12,26 +12,26 @@ export function openAlert(type, message, buttonText) {
     closeAlertButton.textContent = buttonText;
   }
 
-  function closeHandler() {
+  function alertCloseClickHandler() {
     alert.remove();
 
-    closeAlertButton.removeEventListener('click', closeHandler);
-    document.removeEventListener('click', closeOnOutClickHandler);
-    document.removeEventListener('keydown', closeOnEscHandler);
+    closeAlertButton.removeEventListener('click', alertCloseClickHandler);
+    document.removeEventListener('click', onOutCloseClickHandler);
+    document.removeEventListener('keydown', escCloseKeyHandler);
   }
 
-  function closeOnEscHandler(evt) {
+  function escCloseKeyHandler(evt) {
     if (isEscEvent(evt)) {
       evt.preventDefault();
       alert.remove();
     }
 
-    closeAlertButton.removeEventListener('click', closeHandler);
-    document.removeEventListener('click', closeOnOutClickHandler);
-    document.removeEventListener('keydown', closeOnEscHandler);
+    closeAlertButton.removeEventListener('click', alertCloseClickHandler);
+    document.removeEventListener('click', onOutCloseClickHandler);
+    document.removeEventListener('keydown', escCloseKeyHandler);
   }
 
-  function closeOnOutClickHandler(evt) {
+  function onOutCloseClickHandler(evt) {
     if ( isOutsideEvent(evt)) {
       evt.preventDefault();
       alert.remove();
@@ -40,8 +40,8 @@ export function openAlert(type, message, buttonText) {
 
   document.body.append(alert);
 
-  closeAlertButton.addEventListener('click', closeHandler);
-  document.addEventListener('click', closeOnOutClickHandler);
-  document.addEventListener('keydown', closeOnEscHandler);
+  closeAlertButton.addEventListener('click', alertCloseClickHandler);
+  document.addEventListener('click', onOutCloseClickHandler);
+  document.addEventListener('keydown', escCloseKeyHandler);
 }
 

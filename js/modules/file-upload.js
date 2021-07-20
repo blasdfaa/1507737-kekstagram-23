@@ -1,4 +1,4 @@
-import { openUploadModal } from '../utils/upload-modal.js';
+import { uploadModalOpen } from '../utils/upload-modal.js';
 
 const photoUploadForm = document.querySelector('.img-upload__form');
 const photoInput = photoUploadForm.querySelector('.img-upload__input');
@@ -15,13 +15,15 @@ photoInput.addEventListener('change', (evt) => {
   const isFormatValid = ALLOWED_PHOTO_TYPES.some((type) => fileName.endsWith(type));
 
   if (isFormatValid) {
-    openUploadModal();
+    uploadModalOpen();
 
     const reader = new FileReader();
 
     reader.addEventListener('load', () => {
       photoPreview.src = reader.result;
-      photoEffectsPreview.forEach((preview) => preview.style.backgroundImage = `url('${reader.result}')`);
+      photoEffectsPreview.forEach((preview) => {
+        preview.style.backgroundImage = `url('${reader.result}')`;
+      });
     });
 
     reader.readAsDataURL(file);

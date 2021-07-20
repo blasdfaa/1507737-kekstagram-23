@@ -1,4 +1,4 @@
-import { closeFullscreenModal, openFullscreenModal } from '../utils/fullscreen-modal.js';
+import { modalCloseClickHandler, modalOpenClickHandler } from '../utils/fullscreen-modal.js';
 
 const COMMENTS_TO_SHOW = 5;
 
@@ -42,7 +42,7 @@ function showFirstComments(comments) {
   }
 }
 
-function renderMoreCommentHandler() {
+function commentLoadClickHandler() {
   const additionalComments = currentComments.slice(
     commentList.children.length,
     commentList.children.length + COMMENTS_TO_SHOW,
@@ -60,7 +60,7 @@ function renderMoreCommentHandler() {
 
 
 export function renderFullPicture(url, description, likes, comments) {
-  openFullscreenModal();
+  modalOpenClickHandler();
 
   picturePhoto.src = url;
   pictureDescription.textContent = description;
@@ -70,8 +70,8 @@ export function renderFullPicture(url, description, likes, comments) {
   commentList.innerHTML = '';
   currentComments = comments;
 
-  closeModalButton.addEventListener('click', closeFullscreenModal);
-  commentLoader.addEventListener('click', renderMoreCommentHandler);
+  closeModalButton.addEventListener('click', modalCloseClickHandler);
+  commentLoader.addEventListener('click', commentLoadClickHandler);
   showFirstComments(comments);
 }
 

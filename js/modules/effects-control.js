@@ -7,7 +7,7 @@ const effectLevelValue = document.querySelector('.effect-level__value');
 let currentEffect = '';
 let effectUnitMeasure = '';
 
-const DEFAULT_START_VALUE = 0;
+const DEFAULT_START_VALUE = 100;
 const sliderOptions = {
   'NONE': {
     RANGE: {
@@ -93,9 +93,11 @@ function updateSliderOptions({ RANGE: { MIN, MAX }, START, STEP, CURRENT_EFFECT,
   sliderContainer.style.display = display;
 }
 
-function resetEffectSettings() {
+export function resetEffectSettings() {
   photoPreview.classList = '';
   photoPreview.style.filter = '';
+
+  updateSliderOptions(sliderOptions.NONE, DEFAULT_START_VALUE, 'none');
 }
 
 noUiSlider.create(sliderElement, {
