@@ -1,4 +1,4 @@
-import { modalCloseClickHandler, modalOpenClickHandler } from '../utils/fullscreen-modal.js';
+import { photoModalCloseClickHandler, photoModalOpen } from '../utils/fullscreen-modal.js';
 
 const COMMENTS_TO_SHOW = 5;
 
@@ -60,7 +60,7 @@ function commentLoadClickHandler() {
 
 
 export function renderFullPicture(url, description, likes, comments) {
-  modalOpenClickHandler();
+  photoModalOpen();
 
   picturePhoto.src = url;
   pictureDescription.textContent = description;
@@ -70,7 +70,7 @@ export function renderFullPicture(url, description, likes, comments) {
   commentList.innerHTML = '';
   currentComments = comments;
 
-  closeModalButton.addEventListener('click', modalCloseClickHandler);
+  closeModalButton.addEventListener('click', photoModalCloseClickHandler);
   commentLoader.addEventListener('click', commentLoadClickHandler);
   showFirstComments(comments);
 }

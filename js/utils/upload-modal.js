@@ -3,6 +3,7 @@ import { resetFileInput } from '../modules/file-upload.js';
 import { resetScaleModifier } from '../modules/photo-scale-control.js';
 import { isEscEvent } from './esc-event.js';
 
+const photoUploadForm = document.querySelector('.img-upload__form');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const closeButton = document.querySelector('#upload-cancel');
 const body = document.querySelector('body');
@@ -33,6 +34,7 @@ export function uploadModalCloseClickHandler() {
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
 
+  photoUploadForm.reset();
   resetEffectSettings();
   resetScaleModifier();
   resetFileInput();

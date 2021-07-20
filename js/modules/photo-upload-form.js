@@ -1,6 +1,6 @@
 import { sendFormData } from '../utils/api.js';
 import { openAlert } from '../utils/popup-alert.js';
-import { closeUploadModal } from '../utils/upload-modal.js';
+import { uploadModalCloseClickHandler } from '../utils/upload-modal.js';
 import { resetFileInput } from './file-upload.js';
 
 const photoUploadForm = document.querySelector('.img-upload__form');
@@ -55,10 +55,10 @@ function commentsValidInputHandler() {
   }
 }
 
-export function resetFormAfterUpload() {
+function resetUploadForm() {
   photoUploadForm.reset();
 
-  closeUploadModal();
+  uploadModalCloseClickHandler();
   resetFileInput();
 }
 
@@ -70,11 +70,11 @@ photoUploadForm.addEventListener('submit', (evt) => {
 
   sendFormData(
     () => {
-      resetFormAfterUpload(),
+      resetUploadForm(),
       openAlert('success');
     },
     () => {
-      resetFormAfterUpload(),
+      resetUploadForm(),
       openAlert('error');
     },
     new FormData(photoUploadForm),

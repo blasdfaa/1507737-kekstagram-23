@@ -27,7 +27,7 @@ export function photoModalOpen() {
   document.addEventListener('keydown', escCloseKeyHandler);
 }
 
-function photoModalCloseClickHandler() {
+export function photoModalCloseClickHandler() {
   modalOverlay.classList.add('hidden');
   commentLoader.classList.remove('hidden');
   body.classList.remove('modal-open');
